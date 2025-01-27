@@ -13,9 +13,13 @@ namespace PorcupineBot
         private readonly string _token = "";  
 
         public BotClient(DiscordSocketClient client)
-        {
+        { 
+            _token = Environment.GetEnvironmentVariable("token") ?? string.Empty;
+
+            Console.WriteLine(_token);
+
             _socketClient = client; 
-        }
+        } 
 
         public static BotClient Build()
         {
@@ -30,7 +34,7 @@ namespace PorcupineBot
             await _socketClient.LoginAsync(TokenType.Bot, _token);
             await _socketClient.StartAsync();
 
-            _socketClient.AddCommands(); 
+            _socketClient.AddCommands();   
 
             _socketClient.Log += Log; 
 
