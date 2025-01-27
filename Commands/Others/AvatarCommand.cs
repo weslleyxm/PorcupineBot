@@ -37,5 +37,5 @@ namespace PorcupineBot.Commands.Others
 
             await command.RespondAsync(embed: embed.Build());
         }
-    }
+    } 
 }
