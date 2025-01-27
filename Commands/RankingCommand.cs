@@ -30,7 +30,7 @@ namespace PorcupineBot.Commands
 
             if (!exist)
             {
-                await command.RespondAsync("There is already an active rank for this server!");
+                await command.RespondAsync("There is no active ranking for this server yet!");
             }
             else
             {
