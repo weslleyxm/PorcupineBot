@@ -13,8 +13,10 @@ namespace PorcupineBot
         private readonly string _token = "";  
 
         public BotClient(DiscordSocketClient client)
-        { 
-            _token = Environment.GetEnvironmentVariable("token") ?? string.Empty;
+        {
+            Appsettings.LoadAppsettings();
+
+            _token = Appsettings.GetString("token") ?? string.Empty;
 
             Console.WriteLine(_token);
 
@@ -38,7 +40,7 @@ namespace PorcupineBot
 
             _socketClient.Log += Log; 
 
-            await _socketClient.SetGameAsync("kd minha fotoklkkkkkkkkkkkkkkk");
+            await _socketClient.SetGameAsync("Just relaxing waiting for a command");
             await Task.Delay(-1);
         } 
 

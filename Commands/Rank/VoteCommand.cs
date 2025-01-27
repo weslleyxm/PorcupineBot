@@ -2,9 +2,9 @@
 using Discord.WebSocket;
 using PorcupineBot.Repositories;
 
-namespace PorcupineBot.Commands
+namespace PorcupineBot.Commands.Rank
 {
-    public class VoteCommand : CommandBase
+    public class VoteCommand : BaseCommand
     {
         private readonly IRankRepository _rankRepository;
 
@@ -33,7 +33,7 @@ namespace PorcupineBot.Commands
                        .WithRequired(true));
         }
 
-        public override async Task HandlerMessage(SocketSlashCommand command)
+        public override async Task ExecuteCommand(SocketSlashCommand command)
         {
             var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "name");
             var pointsOption = command.Data.Options.FirstOrDefault(option => option.Name == "points");
@@ -48,7 +48,7 @@ namespace PorcupineBot.Commands
             bool exist = await _rankRepository.ExistRank(command.GuildId?.ToString() ?? string.Empty);
 
             if (exist)
-            { 
+            {
                 if (userOption != null && pointsOption != null && reasonOption != null)
                 {
                     var user = (SocketGuildUser)userOption.Value;
@@ -76,7 +76,7 @@ namespace PorcupineBot.Commands
             else
             {
                 await command.RespondAsync("Too bad, it seems no rank has been created");
-            } 
+            }
         }
     }
 }

@@ -2,13 +2,13 @@
 using Discord.WebSocket;
 using PorcupineBot.Repositories;
 
-namespace PorcupineBot.Commands
+namespace PorcupineBot.Commands.Rank
 {
-    public class RankingCommand : CommandBase
+    public class RankCommand : BaseCommand
     {
         private readonly IRankRepository _rankRepository;
 
-        public RankingCommand(IRankRepository database)
+        public RankCommand(IRankRepository database)
         {
             _rankRepository = database;
 
@@ -16,7 +16,7 @@ namespace PorcupineBot.Commands
             WithDescription("shows the ranking of users");
         }
 
-        public override async Task HandlerMessage(SocketSlashCommand command)
+        public override async Task ExecuteCommand(SocketSlashCommand command)
         {
             if (command.GuildId == null)
             {
@@ -34,14 +34,14 @@ namespace PorcupineBot.Commands
             }
             else
             {
-                var rank = await _rankRepository.GetRank(guildId); 
+                var rank = await _rankRepository.GetRank(guildId);
                 var votes = await _rankRepository.GetVotes(guildId);
 
                 if (votes.Count <= 0)
                 {
                     await command.RespondAsync($"\"{rank?.Name}\" rank has not received any votes yet");
-                    return; 
-                } 
+                    return;
+                }
 
                 var embed = new EmbedBuilder
                 {
@@ -52,8 +52,8 @@ namespace PorcupineBot.Commands
                 string rankStr = string.Empty;
                 string votesStr = string.Empty;
                 string reasonStr = string.Empty;
-                 
-                int count = 1; 
+
+                int count = 1;
                 foreach (var item in votes)
                 {
                     rankStr += $"#{count} ︱ <@{item.UserId}>\n";

@@ -11,7 +11,7 @@ namespace PorcupineBot.Extensions
         public static void AddCommands(this DiscordSocketClient discord)
         {
             var discordClient = ServiceContainer.Resolve<DiscordSocketClient>();
-            var instance = new CommandHandler(discordClient);
+            var instance = new CommandBuilder(discordClient);
 
             ServiceContainer.ConfigureServices(services =>
             {

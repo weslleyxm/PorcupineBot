@@ -1,16 +1,13 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using PorcupineBot.Database;
 using PorcupineBot.Repositories;
-using System.Reactive;
-using System;
 
-namespace PorcupineBot.Commands
+namespace PorcupineBot.Commands.Rank
 {
-    public class CreateRankCommand : CommandBase
+    public class CreateCommand : BaseCommand
     {
         private readonly IRankRepository _rankRepository;
-        public CreateRankCommand(IRankRepository repository)
+        public CreateCommand(IRankRepository repository)
         {
             _rankRepository = repository;
 
@@ -35,7 +32,7 @@ namespace PorcupineBot.Commands
                        .WithRequired(true));
         }
 
-        public override async Task HandlerMessage(SocketSlashCommand command)
+        public override async Task ExecuteCommand(SocketSlashCommand command)
         {
             var nameOption = command.Data.Options.FirstOrDefault(option => option.Name == "name");
             var messageOption = command.Data.Options.FirstOrDefault(option => option.Name == "message");
@@ -59,9 +56,9 @@ namespace PorcupineBot.Commands
                 string message = (string)messageOption.Value;
                 string guildId = command.GuildId.ToString() ?? string.Empty;
                 int maxVotesAtTime = Convert.ToInt32(maxVotesAtTimeOption.Value);
-                await _rankRepository.CreateRank(name, guildId, message, maxVotesAtTime); 
+                await _rankRepository.CreateRank(name, guildId, message, maxVotesAtTime);
                 await command.RespondAsync($"Rank \"{name}\" was successfully created the maximum points per vote allowed is {maxVotesAtTime}");
-            } 
+            }
         }
     }
 }
