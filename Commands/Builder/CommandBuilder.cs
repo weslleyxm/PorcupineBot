@@ -34,9 +34,8 @@ namespace PorcupineBot.Commands
 
         private async Task Build() 
         {
-            _discordClient.SlashCommandExecuted += HandlerMessage;
-            ulong guildId = 1019467451597078559;
-            await _discordClient.Rest.BulkOverwriteGuildCommands(applicationCommandProperties.ToArray(), guildId);
+            _discordClient.SlashCommandExecuted += HandlerMessage;  
+            await _discordClient.BulkOverwriteGlobalApplicationCommandsAsync(applicationCommandProperties.ToArray());
         }
 
         private async Task HandlerMessage(SocketSlashCommand command)
