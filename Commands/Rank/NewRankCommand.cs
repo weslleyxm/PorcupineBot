@@ -4,10 +4,10 @@ using PorcupineBot.Repositories;
 
 namespace PorcupineBot.Commands.Rank
 {
-    public class CreateCommand : BaseCommand
+    public class NewRankCommand : BaseCommand
     {
         private readonly IRankRepository _rankRepository;
-        public CreateCommand(IRankRepository repository)
+        public NewRankCommand(IRankRepository repository)
         {
             _rankRepository = repository;
 
