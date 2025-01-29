@@ -15,7 +15,7 @@ namespace PorcupineBot.Commands.Rank
             WithName("vote");
             WithDescription("Vote for someone to receive points");
             AddOptions(new SlashCommandOptionBuilder()
-                       .WithName("name")
+                       .WithName("user")
                        .WithType(ApplicationCommandOptionType.User)
                        .WithDescription("Who the vote goes to")
                        .WithRequired(true),
@@ -35,7 +35,7 @@ namespace PorcupineBot.Commands.Rank
 
         public override async Task ExecuteCommand(SocketSlashCommand command)
         {
-            var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "name");
+            var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "user");
             var pointsOption = command.Data.Options.FirstOrDefault(option => option.Name == "points");
             var reasonOption = command.Data.Options.FirstOrDefault(option => option.Name == "reason");
 
