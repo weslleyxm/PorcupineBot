@@ -27,6 +27,14 @@ namespace PorcupineBot.Services
             });
         }
 
+        public static void AddSingleton<T>(T instance) where T : class
+        { 
+            ConfigureServices(services =>
+            {
+                services.AddSingleton(instance);
+            });
+        }
+
         public static void AddScoped<TService, TImplementation>()
             where TService : class
             where TImplementation : class, TService
