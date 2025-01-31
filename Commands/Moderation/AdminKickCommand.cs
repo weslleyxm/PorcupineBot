@@ -46,16 +46,16 @@ namespace PorcupineBot.Commands.Moderation
                 {
                     var reason = reasonOption != null ? (string)reasonOption.Value : string.Empty;
                     await user.KickAsync(reason);
-                    await command.RespondAsync($"The user {user.Mention} was kicked for the reason of \"{reason}\""); ;
+                    await command.FollowupAsync($"The user {user.Mention} was kicked for the reason of \"{reason}\""); ;
                 }
                 else
                 {
-                    await command.RespondAsync("You do not have permission to ban this user.");
+                    await command.FollowupAsync("You do not have permission to ban this user.");
                 }
             }
             else
             {
-                await command.RespondAsync("Oops, something went wrong");
+                await command.FollowupAsync("Oops, something went wrong");
             }
         }
     }

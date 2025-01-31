@@ -32,18 +32,27 @@ namespace PorcupineBot.Commands
             }
         }
 
-        private async Task Build() 
+        private async Task Build()
         {
-            _discordClient.SlashCommandExecuted += HandlerMessage;  
+            await _discordClient.Rest.DeleteAllGlobalCommandsAsync();
+
+            _discordClient.SlashCommandExecuted += HandlerMessage; 
+
             await _discordClient.BulkOverwriteGlobalApplicationCommandsAsync(applicationCommandProperties.ToArray());
-        }
+        } 
 
         private async Task HandlerMessage(SocketSlashCommand command)
-        {
-            if (Commands.ContainsKey(command.CommandName))
+        { 
+            _ = Task.Run(async () =>
             {
-                await Commands[command.CommandName].Invoke(command);
-            }
+                await command.DeferAsync();
+                if (Commands.ContainsKey(command.CommandName))
+                {
+                    await Commands[command.CommandName].Invoke(command);
+                }
+            });
+
+            await Task.CompletedTask;
         }
     }
 }

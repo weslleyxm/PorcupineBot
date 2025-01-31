@@ -36,12 +36,12 @@ namespace PorcupineBot.Commands.Rank
         public override async Task ExecuteCommand(SocketSlashCommand command)
         {
             var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "user");
-            var pointsOption = command.Data.Options.FirstOrDefault(option => option.Name == "points");
             var reasonOption = command.Data.Options.FirstOrDefault(option => option.Name == "reason");
+            var pointsOption = command.Data.Options.FirstOrDefault(option => option.Name == "points");
 
             if (command.GuildId == null)
             {
-                await command.RespondAsync("Oops, something went wrong");
+                await command.FollowupAsync("Oops, something went wrong");
                 return;
             }
 
@@ -60,22 +60,26 @@ namespace PorcupineBot.Commands.Rank
 
                     if (votes > rank?.MaxVotesAtTime)
                     {
-                        await command.RespondAsync($"What are you trying to do??? You can only have {rank?.MaxVotesAtTime} votes at a time");
+                        await command.FollowupAsync($"What are you trying to do??? You can only have {rank?.MaxVotesAtTime} votes at a time");
                         return;
                     }
 
                     await _rankRepository.InsertVote(user.Id.ToString(), votes, guildId, reason);
 
-                    await command.RespondAsync($"You voted for {user.Mention} to receive {votes} points, for the reason that \"{reason}\"");
+                    await command.FollowupAsync($"You voted for {user.Mention} to receive {votes} points, for the reason that \"{reason}\"");
                 }
                 else
                 {
-                    await command.RespondAsync("Invalid command options");
+                    Console.WriteLine(userOption);
+                    Console.WriteLine(pointsOption);
+                    Console.WriteLine(reasonOption); 
+
+                        await command.FollowupAsync("Invalid command options");
                 }
             }
             else
             {
-                await command.RespondAsync("Too bad, it seems no rank has been created");
+                await command.FollowupAsync("Too bad, it seems no rank has been created");
             }
         }
     }

@@ -32,7 +32,7 @@ namespace PorcupineBot.Commands.Others
 
             if (userOption == null)
             {
-                await command.RespondAsync("Oops, something went wrong");
+                await command.FollowupAsync("Oops, something went wrong");
                 return;
             }
 
@@ -45,7 +45,7 @@ namespace PorcupineBot.Commands.Others
                 .WithColor(Color.Blue)
                 .WithImageUrl(avatarUrl);
 
-            await command.RespondAsync(embed: embed.Build());
+            await command.FollowupAsync(embed: embed.Build());
         }
     }
 }

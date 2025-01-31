@@ -20,7 +20,7 @@ namespace PorcupineBot.Commands.Rank
         {
             if (command.GuildId == null)
             {
-                await command.RespondAsync("Oops, something went wrong");
+                await command.FollowupAsync("Oops, something went wrong");
                 return;
             }
 
@@ -30,7 +30,7 @@ namespace PorcupineBot.Commands.Rank
 
             if (!exist)
             {
-                await command.RespondAsync("There is no active ranking for this server yet!");
+                await command.FollowupAsync("There is no active ranking for this server yet!");
             }
             else
             {
@@ -39,7 +39,7 @@ namespace PorcupineBot.Commands.Rank
 
                 if (votes.Count <= 0)
                 {
-                    await command.RespondAsync($"\"{rank?.Name}\" rank has not received any votes yet");
+                    await command.FollowupAsync($"\"{rank?.Name}\" rank has not received any votes yet");
                     return;
                 }
 
@@ -62,13 +62,13 @@ namespace PorcupineBot.Commands.Rank
                     count++;
                 }
 
-                embed.AddField("Rank", rankStr, true);
-                embed.AddField("Votos", votesStr, true);
-                embed.AddField("Motivo", reasonStr, true);
-
+                embed.AddField("Rank", string.IsNullOrWhiteSpace(rankStr) ? "nothing" : rankStr, true);
+                embed.AddField("Votos", string.IsNullOrWhiteSpace(votesStr) ? "0" : votesStr, true);
+                embed.AddField("Motivo", string.IsNullOrWhiteSpace(reasonStr) ? "nothing" : reasonStr, true);
+                 
                 embed.WithFooter(rank?.Message);
 
-                await command.RespondAsync(embed: embed.Build());
+                await command.FollowupAsync(embed: embed.Build()); 
             }
         }
     }
