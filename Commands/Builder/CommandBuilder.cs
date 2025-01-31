@@ -33,11 +33,8 @@ namespace PorcupineBot.Commands
         }
 
         private async Task Build()
-        {
-            await _discordClient.Rest.DeleteAllGlobalCommandsAsync();
-
-            _discordClient.SlashCommandExecuted += HandlerMessage; 
-
+        { 
+            _discordClient.SlashCommandExecuted += HandlerMessage;  
             await _discordClient.BulkOverwriteGlobalApplicationCommandsAsync(applicationCommandProperties.ToArray());
         } 
 
