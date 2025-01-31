@@ -19,7 +19,6 @@ namespace PorcupineBot
         /// <param name="client">The Discord socket client</param>
         public BotClient(DiscordSocketClient client)
         {
-            Appsettings.LoadAppsettings(); 
             _token = Appsettings.GetString("token") ?? string.Empty; 
             _socketClient = client;
         }

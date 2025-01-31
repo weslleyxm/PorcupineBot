@@ -10,7 +10,7 @@ namespace PorcupineBot.Commands.Moderation
     {
         public AdminKickCommand()
         {
-            WithName("ban");
+            WithName("kick");
             WithDescription("ban a specific user");
             AddOptions(new SlashCommandOptionBuilder()
                        .WithName("user")
