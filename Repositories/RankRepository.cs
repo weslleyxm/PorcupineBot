@@ -84,9 +84,9 @@ namespace PorcupineBot.Repositories
                     {
                         votesList.Add(new VoteModel
                         {
-                            Votes = reader.GetInt32(0),
-                            UserId = reader.GetString(1),
-                            Reason = reader.GetString(2)
+                            Votes = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),  
+                            UserId = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),  
+                            Reason = reader.IsDBNull(2) ? string.Empty : reader.GetString(2)
                         });
                     }
                 }
