@@ -42,17 +42,13 @@ namespace PorcupineBot.Commands
         } 
 
         private async Task HandlerMessage(SocketSlashCommand command)
-        { 
-            _ = Task.Run(async () =>
-            {
-                await command.DeferAsync();
-                if (Commands.ContainsKey(command.CommandName))
-                {
-                    await Commands[command.CommandName].Invoke(command);
-                }
-            });
+        {
+            await command.DeferAsync();
 
-            await Task.CompletedTask;
+            if (Commands.ContainsKey(command.CommandName))
+            {
+                await Commands[command.CommandName].Invoke(command);
+            }  
         }
     }
 }
