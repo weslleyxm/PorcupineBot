@@ -48,7 +48,7 @@ namespace PorcupineBot
 
             _socketClient.Log += Log;
 
-            await _socketClient.SetGameAsync("Simplemente disfrutando el momento"); 
+            await _socketClient.SetCustomStatusAsync("Simplemente disfrutando el momento");  
             await Task.Delay(-1);
         }
 

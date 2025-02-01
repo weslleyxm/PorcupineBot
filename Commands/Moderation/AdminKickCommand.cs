@@ -11,7 +11,7 @@ namespace PorcupineBot.Commands.Moderation
         public AdminKickCommand()
         {
             WithName("kick");
-            WithDescription("ban a specific user");
+            WithDescription("kick a specific user");
             AddOptions(new SlashCommandOptionBuilder()
                        .WithName("user")
                        .WithType(ApplicationCommandOptionType.User)
@@ -50,7 +50,7 @@ namespace PorcupineBot.Commands.Moderation
                 }
                 else
                 {
-                    await command.FollowupAsync("You do not have permission to ban this user.");
+                    await command.FollowupAsync("You do not have permission to ban this user");
                 }
             }
             else
