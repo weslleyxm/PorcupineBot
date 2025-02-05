@@ -23,13 +23,7 @@ namespace PorcupineBot.Commands.Rank
                 await command.FollowupAsync("Oops, something went wrong");
                 return;
             }
-
-            if(command.User.Id != 297868291878158352)
-            {
-                await command.FollowupAsync("Você não é o kenzy!!!!!");
-                return;
-            }  
-
+             
             bool exist = await _rankRepository.ExistRank(command.GuildId?.ToString() ?? string.Empty);
 
             string guildId = command.GuildId.ToString() ?? string.Empty;

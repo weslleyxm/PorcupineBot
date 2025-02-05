@@ -35,6 +35,12 @@ namespace PorcupineBot.Commands.Rank
 
         public override async Task ExecuteCommand(SocketSlashCommand command)
         {
+            if (command.User.Id != 297868291878158352)
+            {
+                await command.FollowupAsync("Você não é o kenzy!!!!!");
+                return;
+            } 
+
             var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "user");
             var reasonOption = command.Data.Options.FirstOrDefault(option => option.Name == "reason");
             var pointsOption = command.Data.Options.FirstOrDefault(option => option.Name == "points");
