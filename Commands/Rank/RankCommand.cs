@@ -56,9 +56,13 @@ namespace PorcupineBot.Commands.Rank
                 int count = 1;
                 foreach (var item in votes)
                 {
+                    string reason = item.Reason; 
+                    if (reason.Length > 25) 
+                        reason = $"{reason.Substring(0, 25)}..."; 
+
                     rankStr += $"#{count} ︱ <@{item.UserId}>\n";
                     votesStr += $"{item.Votes}\n";
-                    reasonStr += $"{item.Reason}\n";
+                    reasonStr += $"{reason}\n"; 
                     count++;
                 }
 
