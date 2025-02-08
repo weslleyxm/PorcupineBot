@@ -32,7 +32,7 @@ namespace PorcupineBot.Commands.Moderation
         }
 
         public async override Task ExecuteCommand(SocketSlashCommand command)
-        {
+        { 
             var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "user");
             var daysOption = command.Data.Options.FirstOrDefault(option => option.Name == "days");
             var reasonOption = command.Data.Options.FirstOrDefault(option => option.Name == "reason");

@@ -40,7 +40,7 @@ namespace PorcupineBot.Commands.Rank
 
             if (command.GuildId == null || nameOption == null || messageOption == null || maxVotesAtTimeOption == null)
             {
-                await command.FollowupAsync("Oops, something went wrong");
+                await command.FollowupWithLocaleAsync("generic_error");
                 return;
             }
 
@@ -48,7 +48,7 @@ namespace PorcupineBot.Commands.Rank
 
             if (exist)
             {
-                await command.FollowupAsync("There is already an active rank for this server!");
+                await command.FollowupWithLocaleAsync("active_rank");
             }
             else
             {
@@ -57,7 +57,7 @@ namespace PorcupineBot.Commands.Rank
                 string guildId = command.GuildId.ToString() ?? string.Empty;
                 int maxVotesAtTime = Convert.ToInt32(maxVotesAtTimeOption.Value);
                 await _rankRepository.CreateRank(name, guildId, message, maxVotesAtTime);
-                await command.FollowupAsync($"Rank \"{name}\" was successfully created the maximum points per vote allowed is {maxVotesAtTime}");
+                await command.FollowupWithLocaleAsync("rank_created", name, maxVotesAtTime); 
             }
         }
     }

@@ -1,0 +1,13 @@
+{
+  "generic_error": "Oops, something went wrong",
+  "no_active_ranking": "There is no active ranking for this server yet!",
+  "no_votes": "{0} rank has not received any votes yet",
+  "rank_created": "\"{1}\" was successfully created. The maximum points per vote allowed is {0}",
+  "active_rank": "There is already an active rank for this server!",
+  "too_many_votes": "What are you trying to do??? You can only have {0} votes at a time",
+  "no_rank": "Too bad, it seems no rank has been created",
+  "invalid_command": "Invalid command options",
+  "vote_registered": "You voted for {0} to receive {1} points, for the reason that \"{2}\""
+} 
+ 
+

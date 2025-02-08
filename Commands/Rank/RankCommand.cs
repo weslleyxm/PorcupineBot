@@ -18,9 +18,11 @@ namespace PorcupineBot.Commands.Rank
 
         public override async Task ExecuteCommand(SocketSlashCommand command)
         {
+            var guild = (command.Channel as SocketGuildChannel)?.Guild; 
+  
             if (command.GuildId == null)
             {
-                await command.FollowupAsync("Oops, something went wrong");
+                await command.FollowupWithLocaleAsync("generic_error"); 
                 return;
             }
              
@@ -30,7 +32,7 @@ namespace PorcupineBot.Commands.Rank
 
             if (!exist)
             {
-                await command.FollowupAsync("There is no active ranking for this server yet!");
+                await command.FollowupWithLocaleAsync("no_active_ranking");
             }
             else
             {
@@ -39,7 +41,7 @@ namespace PorcupineBot.Commands.Rank
 
                 if (votes.Count <= 0)
                 {
-                    await command.FollowupAsync($"\"{rank?.Name}\" rank has not received any votes yet");
+                    await command.FollowupWithLocaleAsync("no_votes", rank?.Name ?? "");
                     return;
                 }
 

@@ -36,7 +36,15 @@ namespace PorcupineBot.Database
                                         last_reason VARCHAR(255)
                                     )";
                  
-                await cmd.ExecuteNonQueryAsync(); 
+                await cmd.ExecuteNonQueryAsync();
+
+                cmd.CommandText = @"CREATE TABLE IF NOT EXISTS locales (
+                                        id INT PRIMARY KEY AUTO_INCREMENT,  
+                                        locale VARCHAR(255),
+                                        guild_id VARCHAR(255)
+                                    )"; 
+                 
+                await cmd.ExecuteNonQueryAsync();
             }
         }
 

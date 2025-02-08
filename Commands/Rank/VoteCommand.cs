@@ -37,9 +37,9 @@ namespace PorcupineBot.Commands.Rank
         {
             if (command.User.Id != 297868291878158352)
             {
-                await command.FollowupAsync("Você não é o kenzy!!!!!");
+                await command.FollowupWithLocaleAsync("not_kenzy");
                 return;
-            } 
+            }
 
             var userOption = command.Data.Options.FirstOrDefault(option => option.Name == "user");
             var reasonOption = command.Data.Options.FirstOrDefault(option => option.Name == "reason");
@@ -47,7 +47,7 @@ namespace PorcupineBot.Commands.Rank
 
             if (command.GuildId == null)
             {
-                await command.FollowupAsync("Oops, something went wrong");
+                await command.FollowupWithLocaleAsync("generic_error");
                 return;
             }
 
@@ -66,26 +66,22 @@ namespace PorcupineBot.Commands.Rank
 
                     if (votes > rank?.MaxVotesAtTime)
                     {
-                        await command.FollowupAsync($"What are you trying to do??? You can only have {rank?.MaxVotesAtTime} votes at a time");
+                        await command.FollowupWithLocaleAsync("too_many_votes", rank?.MaxVotesAtTime ?? 0);
                         return;
                     }
 
                     await _rankRepository.InsertVote(user.Id.ToString(), votes, guildId, reason);
 
-                    await command.FollowupAsync($"You voted for {user.Mention} to receive {votes} points, for the reason that \"{reason}\"");
+                    await command.FollowupWithLocaleAsync("vote_registered", user.Mention, votes, reason);
                 }
                 else
                 {
-                    Console.WriteLine(userOption);
-                    Console.WriteLine(pointsOption);
-                    Console.WriteLine(reasonOption); 
-
-                        await command.FollowupAsync("Invalid command options");
+                    await command.FollowupWithLocaleAsync("invalid_command");
                 }
             }
             else
             {
-                await command.FollowupAsync("Too bad, it seems no rank has been created");
+                await command.FollowupWithLocaleAsync("no_rank");
             }
         }
     }
