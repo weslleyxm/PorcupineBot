@@ -17,14 +17,12 @@ namespace PorcupineBot.Commands.Rank
         }
 
         public override async Task ExecuteCommand(SocketSlashCommand command)
-        {
-            var guild = (command.Channel as SocketGuildChannel)?.Guild; 
-  
+        { 
             if (command.GuildId == null)
             {
                 await command.FollowupWithLocaleAsync("generic_error"); 
                 return;
-            }
+            } 
              
             bool exist = await _rankRepository.ExistRank(command.GuildId?.ToString() ?? string.Empty);
 

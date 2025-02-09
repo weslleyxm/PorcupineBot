@@ -34,7 +34,7 @@ namespace PorcupineBot.Commands.Rank
         }
 
         public override async Task ExecuteCommand(SocketSlashCommand command)
-        {
+        { 
             if (command.User.Id != 297868291878158352)
             {
                 await command.FollowupWithLocaleAsync("not_kenzy");
