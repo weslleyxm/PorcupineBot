@@ -1,12 +1,12 @@
 {
   "generic_error": "Algo deu errado! Era isso que queria? Agora se vira.",
-  "no_active_ranking": "Não tem ranking ativo. Que tal criar um?",
-  "no_votes": "O rank {0} tá vazio. Ninguém votou ainda!",
+  "no_active_ranking": "Não tem ranking ativo que tal criar um?",
+  "no_votes": "O rank {0} tá vazio, Ninguém votou ainda!",
   "rank_created": "\"{1}\" foi criado! Máximo de {0} pontos por voto!",
   "active_rank": "Já tem um ranking ativo. Um só tá bom, né?",
   "too_many_votes": "Calma aí! Máximo de {0} votos!",
-  "no_rank": "Ninguém criou um ranking ainda. Que tal começar?",
-  "invalid_command": "Comando inválido. Tenta de novo!",
+  "no_rank": "Ninguém criou um ranking ainda que tal começar?",
+  "invalid_command": "Comando inválido, tenta de novo!",
   "vote_registered": "Voto em {0} com {1} pontos registrado. Motivo: \"{2}\"",
-  "not_kenzy": "Sério? Tentando ser o Kenzy? Desiste. Não vai rolar!!!"
+  "not_kenzy": "Sério? Tentando ser o Kenzy? Desiste, Não vai rolar!!!"
 }
