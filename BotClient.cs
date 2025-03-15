@@ -2,6 +2,7 @@
 using Discord;
 using PorcupineBot.Extensions;
 using PorcupineBot.Services;
+using MySqlX.XDevAPI;
 
 namespace PorcupineBot
 {
@@ -31,9 +32,7 @@ namespace PorcupineBot
         {
             var config = new DiscordSocketConfig
             {
-                GatewayIntents = GatewayIntents.Guilds |
-                             GatewayIntents.GuildMembers |
-                             GatewayIntents.GuildMessages
+                GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMembers 
             };
 
             ServiceContainer.AddSingleton<DiscordSocketClient>(new DiscordSocketClient(config));
@@ -54,8 +53,9 @@ namespace PorcupineBot
             _socketClient.AddCommands();
 
             _socketClient.Log += Log;
-
+             
             await _socketClient.SetCustomStatusAsync("Simplemente disfrutando el momento");
+  
             await Task.Delay(-1);
         }
 
@@ -69,5 +69,6 @@ namespace PorcupineBot
             Console.WriteLine(msg.ToString());
             return Task.CompletedTask;
         }
+
     }
 }

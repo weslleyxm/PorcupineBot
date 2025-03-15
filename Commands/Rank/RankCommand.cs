@@ -47,7 +47,8 @@ namespace PorcupineBot.Commands.Rank
 
                 SocketGuild guild = discordClient.GetGuild(command.GuildId ?? 0);
                 string[,] infor = new string[votes.Count(), 3];
-
+                 
+                 
                 int index = 0;
                 foreach (var item in votes)
                 {
@@ -57,7 +58,7 @@ namespace PorcupineBot.Commands.Rank
 
                     ulong userId = ulong.Parse(item.UserId);
 
-                    var user = guild.GetUserNameAsync(userId);  
+                    var user = await guild.GetUserNameAsync(userId);
 
                     if (user != null)
                     {

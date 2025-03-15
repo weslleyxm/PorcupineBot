@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using MySqlX.XDevAPI;
 
 namespace PorcupineBot.Services
 {
@@ -10,25 +11,32 @@ namespace PorcupineBot.Services
 
         static UserCache()
         {
-            discordClient = ServiceContainer.Resolve<DiscordSocketClient>();
-        }
+            discordClient = ServiceContainer.Resolve<DiscordSocketClient>(); 
+        } 
 
-        public static string GetUserNameAsync(this SocketGuild guild, ulong userId)
+        public static async Task<string> GetUserNameAsync(this SocketGuild _guild, ulong userId)
         {
             if (userNamesCache.TryGetValue(userId, out var cachedName))
             {
                 return cachedName;
             } 
 
-            var user = guild.GetUser(userId);
-
-            if (user != null)
+            foreach (var guild in await discordClient.GetGuildsAsync()) 
             {
-                string userName = user.Username;
-                userNamesCache[userId] = userName;
-                return userName;
-            }
+                if (guild.Id == _guild.Id)
+                {
+                    var user = await guild.GetUserAsync(userId); 
 
+                    if (user != null)
+                    {
+                        string userName = user.Nickname ?? user.GlobalName ?? user.DisplayName;
+                        string formattedUsername = userName.Length > 17 ? $"{userName.Substring(0, 17)}..." : userName;
+                        userNamesCache[userId] = formattedUsername;
+                        return formattedUsername; 
+                    } 
+                }
+            }
+              
             return string.Empty;
         }
     }
