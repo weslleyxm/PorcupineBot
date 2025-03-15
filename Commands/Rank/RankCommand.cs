@@ -1,6 +1,6 @@
-﻿using Discord;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using PorcupineBot.Repositories;
+using PorcupineBot.Services;
 
 namespace PorcupineBot.Commands.Rank
 {
@@ -17,13 +17,13 @@ namespace PorcupineBot.Commands.Rank
         }
 
         public override async Task ExecuteCommand(SocketSlashCommand command)
-        { 
+        {
             if (command.GuildId == null)
             {
-                await command.FollowupWithLocaleAsync("generic_error"); 
+                await command.FollowupWithLocaleAsync("generic_error");
                 return;
-            } 
-             
+            }
+
             bool exist = await _rankRepository.ExistRank(command.GuildId?.ToString() ?? string.Empty);
 
             string guildId = command.GuildId.ToString() ?? string.Empty;
@@ -34,6 +34,8 @@ namespace PorcupineBot.Commands.Rank
             }
             else
             {
+                var discordClient = ServiceContainer.Resolve<DiscordSocketClient>();
+
                 var rank = await _rankRepository.GetRank(guildId);
                 var votes = await _rankRepository.GetVotes(guildId);
 
@@ -43,36 +45,41 @@ namespace PorcupineBot.Commands.Rank
                     return;
                 }
 
-                var embed = new EmbedBuilder
-                {
-                    Title = rank?.Name,
-                    Color = Color.Blue
-                };
+                SocketGuild guild = discordClient.GetGuild(command.GuildId ?? 0); 
+                string[,] infor = new string[votes.Count(), 3];
 
-                string rankStr = string.Empty;
-                string votesStr = string.Empty;
-                string reasonStr = string.Empty;
-
-                int count = 1;
+                int index = 0;
                 foreach (var item in votes)
                 {
-                    string reason = item.Reason; 
-                    if (reason.Length > 25) 
-                        reason = $"{reason.Substring(0, 25)}..."; 
+                    string reason = item.Reason;
+                    if (reason.Length > 30) 
+                        reason = $"{reason.Substring(0, 30)}..."; 
 
-                    rankStr += $"#{count} ︱ <@{item.UserId}>\n";
-                    votesStr += $"{item.Votes}\n";
-                    reasonStr += $"{reason}\n"; 
-                    count++;
+                    ulong userId = ulong.Parse(item.UserId);
+
+                    var user =  await UserCache.GetUserNameAsync(userId); 
+                     
+                    if (user != null)
+                    {
+                        infor[index, 0] = $"{user}"; 
+                        infor[index, 1] = $"{item.Votes}";
+                        infor[index, 2] = $"{reason}"; 
+                    }  
+                     
+                    index++;
                 }
-
-                embed.AddField("Rank", string.IsNullOrWhiteSpace(rankStr) ? "nothing" : rankStr, true);
-                embed.AddField("Votos", string.IsNullOrWhiteSpace(votesStr) ? "0" : votesStr, true);
-                embed.AddField("Motivo", string.IsNullOrWhiteSpace(reasonStr) ? "nothing" : reasonStr, true);
                  
-                embed.WithFooter(rank?.Message);
+                string serverName = guild.Name;
+                string serverIconUrl = guild.IconUrl;
 
-                await command.FollowupAsync(embed: embed.Build()); 
+                await ImageGenerator.DownloadIcon(serverIconUrl, serverName);
+
+                ImageGenerator.GenerateRankingImage(serverName, rank?.Name ?? "Ranking without name", infor); 
+
+                using (Stream imageStream = ImageGenerator.GetImageStream())
+                {
+                    await command.FollowupWithFileAsync(imageStream, "discord_ranking.png");
+                }
             }
         }
     }

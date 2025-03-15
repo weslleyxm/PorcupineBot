@@ -16,6 +16,7 @@
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
 	<PackageReference Include="MySql.Data" Version="9.2.0" />
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	<PackageReference Include="SkiaSharp" Version="3.116.1" />
 	<PackageReference Include="System.Data.SQLite" Version="1.0.119" /> 
   </ItemGroup>
  
@@ -30,6 +31,15 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Fonts\Poppins-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\Poppins-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\Poppins-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Locales\en-US.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -41,6 +51,11 @@
 
   <ItemGroup>
     <None Include="Translation\Extensions\LocalizationExtensions.cs" />
+  </ItemGroup>
+ 
+
+  <ItemGroup>
+    <Folder Include="Fonts\" />
   </ItemGroup>
 
 </Project>
