@@ -81,21 +81,26 @@ namespace PorcupineBot.Services
             { 
                 string projectRootPath = AppDomain.CurrentDomain.BaseDirectory;
                 string filePath = Path.Combine(projectRootPath, $"{serverName.ToLower()}.png");
+                 
+                byte[] imageBytes = File.ReadAllBytes(filePath);
 
-                using (SKBitmap bitmap = SKBitmap.Decode(filePath))
+                using (MemoryStream ms = new MemoryStream(imageBytes))
                 {
-                    SKCanvas iconCanvas = iconSurface.Canvas;
-                     
-                    using (SKPaint paint = new SKPaint { Color = new SKColor(0, 102, 0) })
+                    using (SKBitmap bitmap = SKBitmap.Decode(filePath))
                     {
-                        iconCanvas.DrawRect(0, 0, 80, 80, paint);
-                    }
-                     
-                    iconCanvas.DrawBitmap(bitmap, new SKRect(0, 0, 80, 80));
-                     
-                    using (SKImage iconImage = iconSurface.Snapshot())
-                    {
-                        canvas.DrawImage(iconImage, 20, 30);
+                        SKCanvas iconCanvas = iconSurface.Canvas;
+
+                        using (SKPaint paint = new SKPaint { Color = new SKColor(0, 102, 0) })
+                        {
+                            iconCanvas.DrawRect(0, 0, 80, 80, paint);
+                        }
+
+                        iconCanvas.DrawBitmap(bitmap, new SKRect(0, 0, 80, 80));
+
+                        using (SKImage iconImage = iconSurface.Snapshot())
+                        {
+                            canvas.DrawImage(iconImage, 20, 30);
+                        }
                     }
                 } 
             }

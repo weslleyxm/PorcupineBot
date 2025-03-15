@@ -17,6 +17,8 @@
 	<PackageReference Include="MySql.Data" Version="9.2.0" />
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	<PackageReference Include="SkiaSharp" Version="3.116.1" />
+	<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1" />
+	<PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.116.1" />
 	<PackageReference Include="System.Data.SQLite" Version="1.0.119" /> 
   </ItemGroup>
  
@@ -52,9 +54,11 @@
   <ItemGroup>
     <None Include="Translation\Extensions\LocalizationExtensions.cs" />
   </ItemGroup>
- 
 
-  <ItemGroup>
+
+
+
+	<ItemGroup>
     <Folder Include="Fonts\" />
   </ItemGroup>
 

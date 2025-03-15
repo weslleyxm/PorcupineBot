@@ -2,9 +2,14 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/runtime:9.0 AS base
+
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y libfontconfig1 libice6 libsm6 && \
+    rm -rf /var/lib/apt/lists/*
+
 USER $APP_UID
 WORKDIR /app
-
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
