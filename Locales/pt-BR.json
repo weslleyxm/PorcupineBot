@@ -1,12 +1,12 @@
 {
-  "generic_error": "Parabéns, você quebrou tudo! Era isso que queria? Ótimo, agora se vira!",
-  "no_active_ranking": "Oi? Você tá procurando um ranking? Que tal criar um, em vez de ficar esperando um milagre?",
-  "no_votes": "O rank {0} tá mais esquecido que promessa de político. Ninguém se deu ao trabalho de votar ainda, MDS!",
-  "rank_created": "\"{1}\" foi criado com sucesso! Uau, que conquista! Mas nem pensa em abusar, o máximo de pontos por voto é {0}",
-  "active_rank": "WTF? Já tem um ranking ativo! Você queria dois? Que ideia brilhante...",
-  "too_many_votes": "Você acha que isso aqui é Black Friday de votos? Máximo de {0}, aceita e chora",
-  "no_rank": "Nossa, que surpresa, ninguém criou um ranking ainda! Talvez porque ninguém liga? Só uma hipótese...",
-  "invalid_command": "Mas que comando maravilhoso… Tenta de novo sem inventar moda", 
-  "vote_registered": "Tá, tá… Seu voto em {0} pra receber {1} pontos foi registrado. E o motivo foi \"{2}\"? Nossa, super importante…", 
-  "not_kenzy": "AH PRONTO, MAIS UM QUE ACHA QUE PODE SER O KENZY! SÉRIO, VOCÊ REALMENTE ACHOU QUE IA ENGANAR ALGUÉM? QUE IDEIA GENIAL, HEIN! ACHA QUE EU NÃO PERCEBO? EU VEJO TUDO! E ADIVINHA? NÃO FUNCIONOU. VOCÊ PODE TENTAR O QUANTO QUISER, MAS A VERDADE DURA E FRIA É: VOCÊ **NUNCA** SERÁ O KENZY. SIMPLES ASSIM. ENTÃO FAZ UM FAVOR PRA TODO MUNDO E PARA DE PASSAR ESSA VERGONHA DESNECESSÁRIA!"
+  "generic_error": "Algo deu errado! Era isso que queria? Agora se vira.",
+  "no_active_ranking": "Não tem ranking ativo que tal criar um?",
+  "no_votes": "O rank {0} tá vazio, Ninguém votou ainda!",
+  "rank_created": "\"{1}\" foi criado! Máximo de {0} pontos por voto!",
+  "active_rank": "Já tem um ranking ativo. Um só tá bom, né?",
+  "too_many_votes": "Calma aí! Máximo de {0} votos!",
+  "no_rank": "Ninguém criou um ranking ainda que tal começar?",
+  "invalid_command": "Comando inválido, tenta de novo!",
+  "vote_registered": "Voto em {0} com {1} pontos registrado. Motivo: \"{2}\"",
+  "not_kenzy": "Sério? Tentando ser o Kenzy? Desiste, Não vai rolar!!!"
 }
