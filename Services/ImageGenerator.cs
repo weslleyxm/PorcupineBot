@@ -204,7 +204,7 @@ namespace PorcupineBot.Services
                 {
                     var text = (i + 1).ToString();
 
-                    using (var font = new SKFont(GetPoppinsTypeface(), 22))
+                    using (var font = new SKFont(GetPoppinsTypeface(), 25))
                     {
                         float textWidth = font.MeasureText(text);
 
@@ -219,20 +219,20 @@ namespace PorcupineBot.Services
                         float textY = y + (i * (rowHeight + 10)) + (rectHeight - textHeight) / 2 - metrics.Ascent;
 
                         ///draw ranking
-                        canvas.DrawText(CreateText(text, 22, true), textX, textY, rankPaint);
+                        canvas.DrawText(CreateText(text, 25, true), textX, textY, rankPaint);
 
                         ///draw name
-                        canvas.DrawText(CreateText(data[i, 0], 22), x + 80, textY, namePaint);
+                        canvas.DrawText(CreateText(data[i, 0], 25, true), x + 80, textY, namePaint);
 
                         ///draw reason 
                         textWidth = font.MeasureText(data[i, 2]);
                         textX = x + (width - textWidth) / 2;
-                        canvas.DrawText(CreateText(data[i, 2], 22, false), textX, textY, valuePaint);
+                        canvas.DrawText(CreateText(data[i, 2], 25, false), textX, textY, valuePaint);
 
                         ///draw point  
                         textWidth = font.MeasureText(data[i, 1]);
                         textX = x + (width - textWidth) - 20;
-                        canvas.DrawText(CreateText(data[i, 1], 22, true), textX, textY, valuePaint);
+                        canvas.DrawText(CreateText(data[i, 1], 25, true), textX, textY, valuePaint);
                     }
                 }
             }
