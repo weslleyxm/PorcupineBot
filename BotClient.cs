@@ -1,7 +1,7 @@
 ﻿using Discord.WebSocket;
 using Discord;
 using PorcupineBot.Extensions;
-using PorcupineBot.Services; 
+using PorcupineBot.Services;
 
 namespace PorcupineBot
 {
@@ -19,7 +19,7 @@ namespace PorcupineBot
         /// <param name="client">The Discord socket client</param>
         public BotClient(DiscordSocketClient client)
         {
-            _token = Appsettings.GetString("token") ?? string.Empty; 
+            _token = Appsettings.GetString("token") ?? string.Empty;
             _socketClient = client;
         }
 
@@ -29,7 +29,14 @@ namespace PorcupineBot
         /// <returns>A new instance of the <see cref="BotClient"/> class</returns>
         public static BotClient Build()
         {
-            ServiceContainer.AddSingleton<DiscordSocketClient>();
+            var config = new DiscordSocketConfig
+            {
+                GatewayIntents = GatewayIntents.Guilds |
+                             GatewayIntents.GuildMembers |
+                             GatewayIntents.GuildMessages
+            };
+
+            ServiceContainer.AddSingleton<DiscordSocketClient>(new DiscordSocketClient(config));
 
             var discord = Factory.Create<BotClient>(typeof(BotClient));
             return discord;
@@ -48,7 +55,7 @@ namespace PorcupineBot
 
             _socketClient.Log += Log;
 
-            await _socketClient.SetCustomStatusAsync("Simplemente disfrutando el momento");  
+            await _socketClient.SetCustomStatusAsync("Simplemente disfrutando el momento");
             await Task.Delay(-1);
         }
 
