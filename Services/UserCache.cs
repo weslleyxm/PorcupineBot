@@ -1,6 +1,5 @@
 ﻿using Discord;
-using Discord.WebSocket;
-using MySqlX.XDevAPI;
+using Discord.WebSocket; 
 
 namespace PorcupineBot.Services
 {

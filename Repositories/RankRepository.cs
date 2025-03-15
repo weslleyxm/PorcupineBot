@@ -75,8 +75,8 @@ namespace PorcupineBot.Repositories
             var votesList = new List<VoteModel>();
             using (var cmd = _databaseConnection.DbConnection().CreateCommand())
             {
-                cmd.CommandText = $"SELECT votes, user_id, last_reason FROM votes WHERE guild_id=@guildId ORDER BY votes DESC";
-                cmd.Parameters.AddWithValue("@guildId", guildId);
+                cmd.CommandText = $"SELECT votes, user_id, last_reason FROM votes WHERE guild_id=@guildId ORDER BY votes DESC LIMIT 9"; 
+                cmd.Parameters.AddWithValue("@guildId", guildId);  
 
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
