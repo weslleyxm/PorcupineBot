@@ -6,25 +6,19 @@ namespace PorcupineBot.Services
     public static class UserCache
     {
         private static readonly Dictionary<ulong, string> userNamesCache = new Dictionary<ulong, string>();
-        private static readonly IDiscordClient discordClient;
-
-        static UserCache()
-        {
-            discordClient = ServiceContainer.Resolve<DiscordSocketClient>(); 
-        } 
-
-        public static async Task<string> GetUserNameAsync(ulong userId)
+  
+        public static string GetUserNameAsync(this SocketGuild guild, ulong userId) 
         {
             if (userNamesCache.TryGetValue(userId, out var cachedName))
             {
                 return cachedName;
             }
-
-            var user = await discordClient.GetUserAsync(userId);
+              
+            var user = guild.GetUser(userId);
 
             if (user != null)
             {
-                string userName = user.Username;
+                string userName = user.Nickname ?? user.GlobalName;  
                 userNamesCache[userId] = userName;
                 return userName;
             }

@@ -45,36 +45,36 @@ namespace PorcupineBot.Commands.Rank
                     return;
                 }
 
-                SocketGuild guild = discordClient.GetGuild(command.GuildId ?? 0); 
+                SocketGuild guild = discordClient.GetGuild(command.GuildId ?? 0);
                 string[,] infor = new string[votes.Count(), 3];
 
                 int index = 0;
                 foreach (var item in votes)
                 {
                     string reason = item.Reason;
-                    if (reason.Length > 30) 
-                        reason = $"{reason.Substring(0, 30)}..."; 
+                    if (reason.Length > 30)
+                        reason = $"{reason.Substring(0, 30)}...";
 
                     ulong userId = ulong.Parse(item.UserId);
 
-                    var user =  await UserCache.GetUserNameAsync(userId); 
-                     
+                    var user = guild.GetUserNameAsync(userId);  
+
                     if (user != null)
                     {
-                        infor[index, 0] = $"{user}"; 
+                        infor[index, 0] = $"{user}";
                         infor[index, 1] = $"{item.Votes}";
-                        infor[index, 2] = $"{reason}"; 
-                    }  
-                     
+                        infor[index, 2] = $"{reason}";
+                    }
+
                     index++;
                 }
-                 
+
                 string serverName = guild.Name;
                 string serverIconUrl = guild.IconUrl;
 
                 await ImageGenerator.DownloadIcon(serverIconUrl, serverName);
 
-                ImageGenerator.GenerateRankingImage(serverName, rank?.Name ?? "Ranking without name", infor); 
+                ImageGenerator.GenerateRankingImage(serverName, rank?.Name ?? "Ranking without name", infor);
 
                 using (Stream imageStream = ImageGenerator.GetImageStream())
                 {
